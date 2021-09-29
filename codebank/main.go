@@ -13,6 +13,7 @@ import (
 func main() {
 	db := setupDb()
 	defer db.Close()
+
 }
 
 func setupTransactionUseCase(db *sql.DB) usecase.UseCaseTransaction {
@@ -22,9 +23,9 @@ func setupTransactionUseCase(db *sql.DB) usecase.UseCaseTransaction {
 }
 
 func setupDb() *sql.DB {
-	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s db=%s sslmode=disable",
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		"db",
-		"5431",
+		"5432",
 		"postgres",
 		"root",
 		"codebank",
@@ -35,3 +36,19 @@ func setupDb() *sql.DB {
 	}
 	return db
 }
+
+/*
+cc := domain.NewCreditCard()
+	cc.Number = "1234"
+	cc.Name = "Eduardo"
+	cc.ExpirationYear = 2021
+	cc.ExpirationMonth = 7
+	cc.CVV = 123
+	cc.Limit = 1000
+	cc.Balance = 0
+
+	repo := repository.NewTransactionRepositoryDb(db)
+	err := repo.CreateCreditCard(*cc)
+	if err != nil {
+		fmt.Println(err)
+	}*/
